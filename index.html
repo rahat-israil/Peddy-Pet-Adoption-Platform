@@ -88,4 +88,49 @@
         </div>
       </section>
     
+      <!-- Dynamic categories will be added here -->
+      <section id="main-section" class="mx-8 mt-14">
+        <!-- Button Section  -->
+        <div class="categories grid grid-cols-2 md:grid-cols-4 gap-5 lg:gap-10 ">
+      
+        </div>
+      </section>
+      <!-- Sort Div  -->
+      <div class="mx-8 flex justify-between items-center mt-8">
+        <h3 class="text-xl font-bold">Best Deal For you</h3>
+        <button id="sort-price-btn" class="btn-color text-lg text-white font-bold py-3 px-6 md:px-12 rounded-xl">Sort by
+          Price</button>
+      </div>
+      
+      <!-- All pets in this category -->
+      <div id="pet-section">
+        <!-- Main section show all pet -->
+        <section class="mx-4 md:flex justify-between md:space-x-5 space-y-4 md:space-y-0 mt-9">
+          <div class="w-[95%] mx-auto md:w-[70%] border rounded-xl p-6">
+            <!-- Left side div  -->
+            <div id="pets-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 ">
+      
+            </div>
+            <!-- No Pets Message  -->
+            <div id="no-pets-message" class="w-full h-fit text-center bg-gray-200 p-4 rounded-lg mt-4 hidden py-20">
+              <div class="mx-auto flex justify-center">
+                <img class="mx-auto border-gray-800" src="./images/error.webp" alt="No Pets">
+              </div>
+              <div class="text-center mt-4">
+                <h2 class="text-3xl font-semibold">No Information Available</h2>
+                <p class="mt-3 px-14 text-sm">It is a long established fact that a reader will be distracted by the readable
+                  content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a.</p>
+              </div>
+            </div>
+      
+          </div>
+          <!-- Right side div -->
+          <div id="liked-pets-grid"
+            class="liked-pets-grid w-[95%] mx-auto md:w-[30%] grid grid-cols-2 gap-4 border p-5 place-content-start rounded-xl">
+            <h3 class="text-lg w-full font-bold mb-4 col-span-2">Liked Pets</h3>
+      
+          </div>
+        </section>
+      </div>
+      
       
