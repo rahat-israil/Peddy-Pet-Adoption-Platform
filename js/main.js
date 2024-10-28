@@ -26,3 +26,42 @@ window.onload = async function () {
   }
 };
 
+// Display dynamic categories with icons
+function displayCategories(categoriesData) {
+  const categoriesDiv = document.querySelector('.categories');
+
+  // Clear previous categories (if any)
+  categoriesDiv.innerHTML = '';
+  // Loop through the categories and add each category dynamically
+  categoriesData.forEach(category => {
+    const button = document.createElement('button');
+    button.classList.add(
+      'px-14',
+      'py-3',
+      'border',
+      'rounded-lg',
+      'hover:bg-green-100',
+      'text-xl',
+      'flex',
+      'items-center',
+      'justify-center',
+      'mr-2',
+      'font-extrabold'
+    );
+    button.setAttribute('data-category', category.category);
+    button.onclick = () => filterByCategory(category.category);
+
+    // Add icon to the button
+    const img = document.createElement('img');
+    img.src = category.category_icon;
+    img.alt = category.category;
+    img.classList.add('w-8', 'mr-2');
+
+    // Append the icon and text to the button
+    button.appendChild(img);
+    button.append(category.category);
+    categoriesDiv.appendChild(button);
+  });
+}
+
+
