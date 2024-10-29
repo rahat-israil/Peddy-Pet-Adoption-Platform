@@ -64,4 +64,74 @@ function displayCategories(categoriesData) {
   });
 }
 
+// Display pets based on category
+function displayPets(category) {
+  const petsGrid = document.getElementById('pets-grid');
+  petsGrid.innerHTML = '';
+  const filteredPets =
+    category === 'All'
+      ? petsData
+      : petsData.filter(pet => pet.category === category);
+
+  if (filteredPets.length === 0) {
+    document.getElementById('no-pets-message').style.display = 'block';
+    // document.getElementById('pets-grid').style.display = 'none';
+    return;
+  } else {
+    document.getElementById('no-pets-message').style.display = 'none';
+  }
+
+  filteredPets.forEach(pet => {
+    const petCard = document.createElement('div');
+    petCard.classList.add(
+      'border',
+      'border-gray-300',
+      'p-4',
+      'text-center',
+      'bg-white',
+      'shadow-md',
+      'rounded-lg'
+    );
+
+    petCard.innerHTML = `
+            <img src="${pet.image}" alt="${pet.pet_name}" 
+            class="w-full h-auto object-cover rounded-md">
+
+            <div class="text-start ">
+            <h2 class="font-bold text-xl mt-2">${pet.pet_name}</h2>
+
+            <p class="text-gray-700 text-lg"> <span> <i class="fa-light fa-grid-2-plus"></i> <span class="pl-2"> Breed: </span> ${
+              pet.breed
+            } </span> </p>
+            
+            <p class="text-gray-700 text-lg"> <span> <i class="fa-light fa-calendar"></i>  <span class="pl-[10px]"> Birth:
+            </span> ${pet.date_of_birth || 'Unknown Birth Date'} </span> </p>
+
+            <p class="text-gray-700 text-lg"> <span> <i class="fa-light fa-mercury text-[22px]"></i> <span class="pl-[10px]"> Gender:  </span>${
+              pet.gender || 'Unknown'
+            }</span> </p>
+
+            <p class="text-gray-700 text-lg"> <span class="pb-2" > <i class="fa-light fa-dollar-sign text-xl pl-[2px]"></i> <span class="pl-[12px]">
+            Price: </span>$${pet.price || 'N/A'}</span> </p>
+             </div>
+
+             <div class="border w-full my-3"></div>
+
+            <div class="flex justify-between  gap-[3px]">
+            <button class="mt-2 px-6 md:px-3  border-2 rounded-lg border-gray-300 " onclick="likePet(${
+              pet.petId
+            })">
+
+            <i class="fa-light fa-thumbs-up"></i>
+            
+            </button>
+            <button id="adopt-button" class="mt-2 px-6 md:px-3 py-1 border-2 border-gray-300  text-[#0E7A81] font-bold rounded-lg" onclick="showAdoptModal()">Adopt</button>
+            <button class="mt-2 px-6 md:px-3 py-1 border-2 border-gray-300 text-[#0E7A81] font-bold rounded-lg" 
+            onclick="showPetDetails(${pet.petId})">Details</button>
+            </div>
+        `;
+    petsGrid.appendChild(petCard);
+  });
+}
+
 
