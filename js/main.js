@@ -134,4 +134,73 @@ function displayPets(category) {
   });
 }
 
+// Filter pets by category
+function filterByCategory(category) {
+  activeCategory = category;
+  displayPets(category);
+}
+
+// Add pet to the liked pets grid
+function likePet(petId) {
+  const likedPetsGrid = document.getElementById('liked-pets-grid');
+  const pet = petsData.find(p => p.petId === petId);
+
+  if (!likedPets.includes(petId)) {
+    likedPets.push(petId);
+
+    const petThumbnail = document.createElement('img');
+    petThumbnail.src = pet.image;
+    petThumbnail.classList.add(
+      'w-full',
+      'h-auto',
+      'rounded-lg',
+      'object-cover'
+    );
+    likedPetsGrid.appendChild(petThumbnail);
+  }
+}
+
+// Sort pets by price
+document
+  .getElementById('sort-price-btn')
+  .addEventListener('click', function () {
+    petsData.sort((a, b) => b.price - a.price);
+    displayPets(activeCategory);
+  });
+
+// Show pet details in modal
+function showPetDetails(petId) {
+  const pet = petsData.find(p => p.petId === petId);
+
+  // Populate modal content
+  document.getElementById('modal-pet-image').src = pet.image;
+  document.getElementById('modal-pet-name').textContent = pet.pet_name;
+  document.getElementById(
+    'modal-pet-breed'
+  ).textContent = `Breed: ${pet.breed}`;
+  document.getElementById('modal-pet-birth').textContent = `Birth: ${
+    pet.date_of_birth || 'Unknown Birth Date'
+  }`;
+  document.getElementById('modal-pet-gender').textContent = `Gender: ${
+    pet.gender || 'Unknown'
+  }`;
+  document.getElementById(
+    'modal-pet-vaccination'
+  ).textContent = `Vaccinated Status: ${
+    pet.vaccinated_status || 'Not Vaccinated'
+  }`;
+  document.getElementById('modal-pet-price').textContent = `Price: $${
+    pet.price || 'N/A'
+  }`;
+  document.getElementById('modal-pet-details').textContent =
+    pet.pet_details || 'No additional details available.';
+
+  // Show modal
+  document.getElementById('pet-details-modal').classList.remove('hidden');
+}
+
+// Close modal when clicking the close button
+document.getElementById('close-modal-btn').addEventListener('click', () => {
+  document.getElementById('pet-details-modal').classList.add('hidden');
+});
 
