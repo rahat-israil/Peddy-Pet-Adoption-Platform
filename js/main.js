@@ -204,3 +204,31 @@ document.getElementById('close-modal-btn').addEventListener('click', () => {
   document.getElementById('pet-details-modal').classList.add('hidden');
 });
 
+// Function to show adopt modal and countdown
+function showAdoptModal() {
+  const adoptModal = document.getElementById('adopt-modal');
+  const countdownSpan = document.getElementById('countdown');
+  // const adoptButton = document.getElementById('adopt-button');
+  let countdown = 3;
+
+  //show the modal
+  adoptModal.classList.remove('hidden');
+
+  //initial countdown
+  countdownSpan.textContent = countdown;
+
+  //Update the countdown every second
+  const countdownInterval = setInterval(function () {
+    countdown--;
+    countdownSpan.textContent = countdown;
+
+    if (countdown < 0) {
+      clearInterval(countdownInterval);
+      adoptModal.classList.add('hidden');
+
+      // adoptButton.textContent = 'Adopted';
+      // adoptButton.classList.add('text-gray-500');
+    }
+  }, 1000);
+}
+
