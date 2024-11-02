@@ -232,3 +232,39 @@ function showAdoptModal() {
   }, 1000);
 }
 
+// Highlight the selected category and reset others
+function highlightSelectedCategory(selectedButton) {
+  // Reset the background and border for all buttons
+  const buttons = document.querySelectorAll('.categories button');
+  buttons.forEach(button => {
+    button.classList.remove('bg-[#0E7A81]', 'text-white', 'rounded-full'); // Remove active styles
+    button.classList.add('text-black', 'border-[#0E7A81]'); // Revert to default
+  });
+
+  // Apply new styles to the selected button
+  selectedButton.classList.add('bg-[#0E7A81]', 'text-white', 'rounded-full'); // Add active styles
+}
+
+// Updated filterByCategory function to include loading event
+async function filterByCategory(category) {
+  if (activeCategory === category) {
+    return; // If the category is already active, do nothing
+  }
+
+  activeCategory = category;
+
+  // Show spinner and highlight the selected category button
+  const selectedButton = document.querySelector(
+    `button[data-category="${category}"]`
+  );
+  highlightSelectedCategory(selectedButton);
+
+  // Show the loading spinner
+  document.getElementById('loading-spinner').classList.remove('hidden');
+
+  // Add a 2-second delay before loading pets
+  await new Promise(resolve => setTimeout(resolve, 2000)); // 2000ms = 2 seconds
+
+  document.getElementById('loading-spinner').classList.add('hidden'); // Hide the spinner
+  displayPets(activeCategory); // Load pets of the selected category
+}
